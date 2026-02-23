@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zodiac Network | Restricted Access</title>
+    <link rel="stylesheet" href="assets/css/theme.css">
+</head>
+<body>
+
+    <div class="login-frame">
+
+        <!-- Header -->
+        <div class="frame-header">
+            <div class="status-bar">
+                <span class="status-dot"></span>
+                <span>SECURE CONNECTIONS</span>
+            </div>
+            <h1 class="login-title">ZODIAC_SYSTEM<span class="title-version"></span></h1>
+            <p class="login-subtitle">Network Access Terminal &nbsp;/&nbsp; Sector 88</p>
+        </div>
+
+        <!-- Alert notice -->
+        <div class="notice">
+            <span class="notice-icon">⚠</span>
+            ENCRYPTED TERMINAL ACCESS ONLY
+        </div>
+
+        <!-- Separator -->
+        <div class="divider"><span>AUTH REQUIRED</span></div>
+
+        <!-- Form -->
+        <div class="form-container">
+
+            <div class="field-group">
+                <label class="field-label" for="id_field">// Operator ID</label>
+                <div class="input-wrap">
+                    <span class="input-prefix"></span>
+                    <input type="text" id="id_field" placeholder="enter_operator_id" autocomplete="off" spellcheck="false">
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label" for="key_field">// Security Key</label>
+                <div class="input-wrap">
+                    <span class="input-prefix"></span>
+                    <input type="password" id="key_field" placeholder="••••••••••••" autocomplete="off">
+                </div>
+            </div>
+
+            <button onclick="validateAccess()" data-text="INITIATE LOGIN">
+                <span class="btn-text">INITIATE LOGIN</span>
+                <span class="btn-arrow">⟶</span>
+            </button>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <span>Trace ID: 88-ZOD-991</span>
+            <span class="footer-sep">|</span>
+            <span id="session-id">SESSION: --------</span>
+            <span class="footer-sep">|</span>
+            <span>v2.0.1</span>
+        </div>
+
+    </div>
+
+    <script src="assets/js/system-data.js"></script>
+    <script src="assets/js/auth-core.js"></script>
+    <script>
+        // Live clock
+        function updateClock() {
+            const now = new Date();
+            const t = [now.getHours(), now.getMinutes(), now.getSeconds()]
+                .map(n => String(n).padStart(2, '0')).join(':');
+            document.getElementById('clock-display').textContent = t;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Random session ID on load
+        const sid = Array.from({length: 8}, () =>
+            Math.floor(Math.random() * 16).toString(16).toUpperCase()
+        ).join('');
+        document.getElementById('session-id').textContent = 'SESSION: ' + sid;
+
+        // Typing scramble effect on title
+        const titleEl = document.querySelector('.login-title');
+        const finalText = 'ZODIAC_SYSTEM';
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_@#$%';
+        let iteration = 0;
+        const scramble = setInterval(() => {
+            titleEl.childNodes[0].nodeValue = finalText.split('').map((letter, i) => {
+                if (i < iteration) return letter;
+                return chars[Math.floor(Math.random() * chars.length)];
+            }).join('');
+            if (iteration >= finalText.length) clearInterval(scramble);
+            iteration += 0.4;
+        }, 40);
+    </script>
+</body>
+</html>

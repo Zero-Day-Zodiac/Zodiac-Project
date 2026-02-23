@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zodiac Terminal | Operator Dashboard</title>
+    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="assets/css/portal.css">
+</head>
+<body class="portal-body">
+
+    <span class="ambient-glyph top-left">⌗ ZOD-SYS / DASHBOARD</span>
+    <span class="ambient-glyph top-right" id="clock-display">--:--:--</span>
+    <span class="ambient-glyph bottom-left">Trace ID: 88-ZOD-991</span>
+    <span class="ambient-glyph bottom-right">ENC: AES-256</span>
+
+    <div class="dashboard">
+
+        <header class="dash-header">
+            <div>
+                <h1 class="dash-title">OPERATOR_DASHBOARD</h1>
+                <span class="dash-subtitle">// Zodiac Network — Restricted Shell v2.0</span>
+            </div>
+            <div class="status-bar">
+                <span class="status-dot"></span>
+                <span>ALL OPERATIONS STEALTH</span>
+            </div>
+        </header>
+
+        <div class="dash-divider"></div>
+
+        <!-- Active Tasks -->
+        <section class="panel">
+            <div class="panel-header">
+                <span class="panel-icon">◈</span>
+                <h2>ACTIVE TASKS</h2>
+            </div>
+            <div class="task-list">
+
+                <div class="task-item">
+                    <span class="task-badge staged">STAGED</span>
+                    <span class="task-name">Data Exfiltration from Subnet_A</span>
+                </div>
+
+                <div class="task-item">
+                    <span class="task-badge active">ACTIVE</span>
+                    <span class="task-name">Monitoring NovaDynamics traffic</span>
+                </div>
+
+                <div class="task-item">
+                    <span class="task-badge locked">LOCKED</span>
+                    <span class="task-name">Final Encryption Payload</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- System Metrics -->
+        <section class="panel">
+            <div class="panel-header">
+                <span class="panel-icon">◈</span>
+                <h2>SYSTEM METRICS</h2>
+            </div>
+            <div class="metrics-list">
+                <div class="metric-row">
+                    <span class="metric-label">CPU Load</span>
+                    <span class="metric-value" id="cpu-val">12<span class="metric-unit">%</span></span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Connections</span>
+                    <span class="metric-value">4 <span class="metric-unit">Active</span></span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Encryption Status</span>
+                    <span class="metric-value ok">VERIFIED</span>
+                </div>
+            </div>
+            <p class="note">// Note: All operations are currently stealth.</p>
+        </section>
+
+        <footer class="dash-footer">
+            <a href="index.html" class="terminate-link">
+                <span>⏻</span> TERMINATE SESSION
+            </a>
+        </footer>
+
+    </div>
+
+    <script src="assets/js/system-data.js"></script>
+    <script src="assets/js/auth-core.js"></script>
+    <script>
+        function pad(n) { return String(n).padStart(2, '0'); }
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock-display').textContent =
+                [now.getHours(), now.getMinutes(), now.getSeconds()].map(pad).join(':');
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        setInterval(() => {
+            const v = Math.floor(10 + Math.random() * 8);
+            document.getElementById('cpu-val').innerHTML = `${v}<span class="metric-unit">%</span>`;
+        }, 2000);
+    </script>
+</body>
+</html>
